@@ -16,8 +16,8 @@ class CLI
 
         -To see all mountains, enter LIST
         -To go to a specific mountain, enter it below!
-
         "
+
         input = gets.strip
         if input == "LIST" || input == "List" || input == "list"
             initial_list
@@ -37,7 +37,7 @@ class CLI
     end
 
     def get_mtns
-        mountain_array = Scraper.get_page(URL)
+        mountain_array = Scraper.new.get_page(URL)
         Mountain.make_list(mountain_array)
     end
 
