@@ -2,21 +2,24 @@
 # Immeditely create instances with API data
 # Keep track of all objects in a class variable
 
-require 'open-uri'
 
-class Module
+class Mountain
 
-    attr_accessor :name, :range, :elevation, :prominence, :location
+    attr_accessor :name, :range
 
     @@all = []
 
-    def initialize(name, range, elevation, prominence, location)
-        @name = name
-        @range = range
-        @elevation = elevation
-        @prominence = prominence
-        @location = location
+    def initialize(mountain_hash)
+        mountain_hash.each do |k, v|
+            self.send("#{k}=", v)
+        end
         @@all << self
+    end
+
+    def self.make_list(mountain_array)
+        mountain_array.each do |hash|
+            Mountain.new(hash)
+        end
     end
 
     def self.all
