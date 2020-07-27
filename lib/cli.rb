@@ -8,14 +8,16 @@ class CLI
         puts "
          _  _ _____ _   _ ____       _
         | || |_   _| \\ | |  _ \\     /#\\
-        | || |_| | |  \\| | |_| |   /###\\
+        | || |_| | |  \\| | |_| |   /###\\ 
         |__   _| | | |\\  |  _ <   /     \\
-           |_| |_| |_| \\_|_| \\_\\ /.......\\        
+           |_| |_| |_| \\_|_| \\_\\ /.......\\ 
 
         4TNR: A Colorado Fourteeners Guide
 
-        -To see all mountains, enter LIST
+        -To see all mountains, enter 'list'
         -To go to a specific mountain, enter it below!
+
+        -To exit, type 'quit'
         "
 
         input = gets.strip
@@ -45,6 +47,10 @@ class CLI
         Mountain.all.each_with_index do |mountain|
             puts "Name: #{mountain.name}"
         end
+    end
+
+    def exit
+        "Goodbye"
     end
 
 

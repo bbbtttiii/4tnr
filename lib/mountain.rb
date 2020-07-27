@@ -5,21 +5,12 @@
 
 class Mountain
 
-    attr_accessor :name, :range
+    attr_accessor :name, :range, :elevation, :location, :rank
 
     @@all = []
 
-    def initialize(mountain_hash)
-        mountain_hash.each do |k, v|
-            self.send("#{k}=", v)
-        end
+    def initialize()
         @@all << self
-    end
-
-    def self.make_list(mountain_array)
-        mountain_array.each do |hash|
-            Mountain.new(hash)
-        end
     end
 
     def self.all
@@ -31,3 +22,4 @@ class Mountain
     end
 
 end
+

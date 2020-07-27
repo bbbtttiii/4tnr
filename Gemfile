@@ -8,5 +8,3 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem 'pry'
 gem 'nokogiri'
 gem 'httparty'
-gem 'openuri'
-gem 'net/http'
