@@ -2,9 +2,16 @@
 # Only class that should have puts and gets
 
 
-class CLI
+class CLI 
 
     def run
+        initial_scrape
+        start
+    end
+
+
+    def start
+
         puts "
          _  _ _____ _   _ ____    
         | || |_   _| \\ | |  _ \\  
@@ -21,24 +28,30 @@ class CLI
 
         input = gets.strip
 
-        if input.downcase == "list"
-            initial_list
-        elsif input.downcase == "quit"
-            quit
-        elsif input.downcase == ""
+        if input.downcase == "" #find_by_name search
+            asdf
         else
-            puts "Sorry, I couldn't find that!"
+            if input.downcase == "list"
+                print_list
+            elsif input.downcase == "quit"
+                quit
+            else
+                puts "Sorry, I couldn't find that."
+            end
         end
 
     end
 
-    def initial_list
-        Scraper.new.get_page
-        Mountain.all.each_with_index do |mountain|
-            puts "Name: #{mountain.name}"
-        end
+    def initial_scrape
+        array = Scraper.get_page
+        Mountain.create_from_scrape(array)
     end
 
+    def print_list
+        Mountain.all.each do |mtn|
+            puts "#{rank}) #{name}"
+        end
+    end
 
     def mountain_page
         puts "##{rank}) #{name}"
@@ -62,9 +75,7 @@ class CLI
 
 
 
-    def find_by_name(name)
-        Mountain.all.find{|mountain| mountain.name == name}
-    end
+
 
     def quit
         "Goodbye!"
