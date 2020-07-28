@@ -14,32 +14,29 @@ class CLI
         puts "      |_| |_| |_| \\_|_| \\_\\ "
         puts ""
         puts "4TNR: A Colorado Fourteeners Guide"
-
         scrape
-        start
+        menu
     end
 
-    def start
-
+    def menu
         puts ""
         puts "-To see all mountains, enter 'list'"
         puts "-To go to a specific mountain, enter it below!"
         puts "-To exit, enter 'quit'"
-
         input = gets.strip
 
-        if input.downcase == "" #find_by_name search
-            asdf
-        else
+        # if input.downcase ==  "" #find_by_name search
+        #     asdf
+        # else
             if input.downcase == "list"
                 print_list
             elsif input.downcase == "quit"
                 quit
             else
-                puts "Sorry, I couldn't find that."
-                start
+                not_found
+                menu
             end
-        end
+        # end
 
     end
 
@@ -54,6 +51,18 @@ class CLI
         end
     end
 
+    # def search
+    #     @@all.grep(/#{input}/)
+    # end
+
+    # def mountain_found?
+    #     if self.search == true
+    #         mountain_page
+    #     else
+    #         not_found
+    #     end
+    # end
+
     def mountain_page
         puts "##{rank}) #{name}"
         puts ""
@@ -67,19 +76,22 @@ class CLI
         input = gets.strip
 
         if input.downcase == "back"
-            run
+            menu
         elsif input.downcase == "quit"
             quit
         else
-            puts "Sorry, I didn't understand that."
+            invalid_input
         end
     end
 
 
+    def not_found
+        puts "Sorry, I couldn't find that."
+    end
 
-
-
-
+    def invalid_input
+        puts "Sorry, I didn't understand that."
+    end
 
     def quit
        puts "Goodbye!"
