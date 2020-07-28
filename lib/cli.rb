@@ -40,7 +40,7 @@ class CLI
     
     end
 
-    def scrape
+    def scrape 
         array = Scraper.get_page
         Mountain.create_from_scrape(array)
         # binding.pry
@@ -48,8 +48,8 @@ class CLI
 
     def print_list
         Mountain.all.each do |mtn|
-            puts "#{mtn.stats}"
-            binding.pry
+            puts "##{mtn.rank}) #{mtn.name}" 
+            # binding.pry
         end
     end
 
@@ -66,11 +66,11 @@ class CLI
     # end
 
     def mountain_page
-        puts "##{rank}) #{name}"
+        puts "##{mtn.rank}) #{mtn.name}"
         puts ""
-        puts "Elevation: #{elevation}"
-        puts "Range: #{range}"
-        puts "Location #{location}"
+        puts "Elevation: #{mtn.elevation}"
+        puts "Range: #{mtn.range}"
+        puts "Location #{mtn.location}"
         puts ""
         puts "-To go back, enter 'back'"
         puts "-To exit, enter 'quit'"

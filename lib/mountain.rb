@@ -5,30 +5,30 @@
 
 class Mountain
 
-    attr_accessor :name, :range, :elevation, :location, :rank, :stats
+  attr_accessor :name, :range, :elevation, :location, :rank, :stats
 
-    @@all = []
+  @@all = []
+  
+  def initialize(hash)
+    hash.each do |k, v|
+      self.send("#{k}=", v)
+    end
+    @@all << self
+  end
     
-    def initialize(hash) 
-      hash.each do |k, v|
-        self.send("#{k}=", v)
-      end
-      @@all << self
+  def self.create_from_scrape(list)
+    list.each do |hash|
+      Mountain.new(hash)
     end
-      
-    def self.create_from_scrape(list)
-      list.each do |hash|
-        Mountain.new(hash)
-      end
-    end
+  end
 
-    def self.all
-      @@all
-      # binding.pry
-    end
+  def self.all
+    @@all
+    # binding.pry
+  end
 
-    # def self.find_by_name(input)
-    #   self.all.find{|mountain| mountain.name == input}
-    # end
+  # def self.find_by_name(input)
+  #   self.all.find{|mountain| mountain.name == input}
+  # end
 
 end

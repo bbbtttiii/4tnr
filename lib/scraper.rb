@@ -8,18 +8,19 @@ class Scraper
         page = Nokogiri::HTML(open("https://en.wikipedia.org/wiki/List_of_Colorado_fourteeners"))
         list = []
         
-        page.css(".wikitable").each do |item|
-            rank = item.css("td:nth-of-type(1)")
-            name = item.css("td:nth-of-type(2) a[title]")
-            range = item.css("td:nth-of-type(3) a[title]")
-            elevation = item.css("td:nth-of-type(4)")
-            location = item.css("td span.geo-dec")
+        page.css(".wikitable tbody tr").each do |item|
+            # binding.pry
+            rank = item.css("td:nth-of-type(1)").text.strip
+            name = item.css("td:nth-of-type(2) a[title]").text
+            range = item.css("td:nth-of-type(3) a[title]").text
+            elevation = item.css("td:nth-of-type(4)").text
+            location = item.css("td span.geo-dec").text
             stats = {
-                :rank => rank.text.strip,
-                :name => name.text.strip,
-                :range => range.text.strip,
-                :elevation => elevation.text.strip,
-                :location => location.text.strip
+                :rank => rank,
+                :name => name,
+                :range => range,
+                :elevation => elevation,
+                :location => location
             }
             
             list << stats
