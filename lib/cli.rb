@@ -37,17 +37,19 @@ class CLI
                 menu
             end
         # end
-
+    
     end
 
     def scrape
         array = Scraper.get_page
         Mountain.create_from_scrape(array)
+        # binding.pry
     end
 
     def print_list
-        Mountain.all.each do |mtn, rank|
-            puts "##{rank}) #{mtn}"
+        Mountain.all.each do |mtn|
+            puts "#{mtn.stats}"
+            binding.pry
         end
     end
 
