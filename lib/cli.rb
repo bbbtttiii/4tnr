@@ -19,15 +19,19 @@ class CLI
         puts "-To see all mountains, enter 'list'".colorize(:green)
         # puts "-To go to a specific mountain, enter it below!".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
+
         input = gets.strip
 
         # if input.to_i == valid_mountain  #find_by_name search
         #     mountain_page
         # else
             if input.downcase == "list"
-                print_list
+                print_1_to_19
             elsif input.downcase == "quit"
                 quit
+            elsif input.to_i > 0 && input.to_i <= 53
+                mountain = Mountain.find(input.to_i)
+                mountain_page(mountain)
             else
                 not_found
                 menu
@@ -35,25 +39,87 @@ class CLI
         # end
     end
 
-    def print_list
+    def print_1_to_19
         Mountain.all.each do |mountain|
-            if mountain.rank.to_i > 0 && mountain.rank.to_i < 20
+            if mountain.rank.to_i >= 1 && mountain.rank.to_i <= 19
                 puts "##{mountain.rank.to_i}) #{mountain.name}"
             end 
         end
+
         puts ""
-        puts "(To see more, enter 'next')".colorize(:green)
+        puts "To see more, enter 'next'".colorize(:green)
         puts ""
         puts "Enter a number:".colorize(:green)
         puts ""
 
         input = gets.strip
-        
         if input.downcase == "quit"
             quit
         elsif input.downcase == "next"
-            print_list_2
-        elsif input.to_i <= 20
+            print_20_to_39
+        elsif input.downcase == "list"
+            print_1_to_19
+        elsif input.to_i >= 1 && input.to_i <= 53
+            mountain = Mountain.find(input.to_i)
+            mountain_page(mountain)
+        else
+            not_found
+            menu
+        end
+    end
+
+    def print_20_to_39
+        Mountain.all.each do |mountain|
+            if mountain.rank.to_i >= 20 && mountain.rank.to_i <= 39
+                puts "##{mountain.rank.to_i}) #{mountain.name}"
+            end 
+        end
+    
+        puts ""
+        puts "To see more, enter 'next'".colorize(:green)
+        puts "To go back, enter 'back'".colorize(:green)
+        puts ""
+        puts "Enter a number:".colorize(:green)
+        puts ""
+
+        input = gets.strip
+        if input.downcase == "quit"
+            quit
+        elsif input.downcase == "next"
+            print_40_to_53
+        elsif input.downcase == "back"
+            print_1_to_19
+        elsif input.to_i >= 1 && input.to_i <= 53
+            mountain = Mountain.find(input.to_i)
+            mountain_page(mountain)
+        else
+            not_found
+            menu
+        end
+    end
+    
+    def print_40_to_53
+        Mountain.all.each do |mountain|
+            if mountain.rank.to_i > 39
+                puts "##{mountain.rank.to_i}) #{mountain.name}"
+            end 
+        end
+    
+        puts ""
+        puts "To go back, enter 'back'".colorize(:green)
+        puts ""
+        puts "Enter a number:".colorize(:green)
+        puts ""
+        
+        input = gets.strip
+        if input.downcase == "quit"
+            quit
+        elsif input.downcase == "back"
+            print_20_to_39
+        elsif input.downcase == "next"
+            puts "End of list!"
+            menu
+        elsif input.to_i >= 1 && input.to_i <= 53
             mountain = Mountain.find(input.to_i)
             mountain_page(mountain)
         else
@@ -67,6 +133,7 @@ class CLI
         puts "##{mountain.rank.to_i}:" + " #{mountain.name}".colorize(:light_blue)
         puts ""
         puts "Elevation:".colorize(:magenta) + " #{mountain.elevation}"
+        puts "Prominence:".colorize(:magenta) + " #{mountain.prominence}"
         puts "Range:".colorize(:magenta) + " #{mountain.range}"
         puts "Location:".colorize(:magenta) + " #{mountain.location}"
         puts ""
@@ -74,9 +141,14 @@ class CLI
         puts "-To exit, enter 'quit'".colorize(:green)
 
         input = gets.strip
-
         if input.downcase == "list"
-            print_list
+            if (mountain.rank.to_i >= 1 && mountain.rank.to_i <= 19)
+                print_1_to_19
+            elsif (mountain.rank.to_i >= 20 && mountain.rank.to_i <= 39)
+                print_20_to_39
+            elsif (mountain.rank.to_i >= 40 && mountain.rank.to_i <=53)
+                print_40_to_53
+            end
         elsif input.downcase == "quit"
             quit
         else
@@ -87,10 +159,6 @@ class CLI
 
     # def search
     #     @@all.grep(/#{input}/)
-    # end
-
-    # def valid_mountain
-    #     Mountain.all.any?{|num| num == input}
     # end
 
     def scrape 
@@ -111,61 +179,5 @@ class CLI
        puts "Goodbye!".colorize(:red)
     end
 
-
 end
 
-
-
-def print_list_2
-    Mountain.all.each do |mountain|
-        if mountain.rank.to_i > 19 && mountain.rank.to_i < 40
-            puts "##{mountain.rank.to_i}) #{mountain.name}"
-        end 
-    end
-    puts ""
-    puts "(To see more, enter 'next')".colorize(:green)
-    puts ""
-    puts "Enter a number:".colorize(:green)
-    puts ""
-
-    input = gets.strip
-    
-    if input.downcase == "quit"
-        quit
-    elsif input.downcase == "next"
-        print_list_3
-    elsif input.to_i <= 53
-        mountain = Mountain.find(input.to_i)
-        mountain_page(mountain)
-    else
-        not_found
-        menu
-    end
-end
-
-def print_list_3
-    Mountain.all.each do |mountain|
-        if mountain.rank.to_i > 39
-            puts "##{mountain.rank.to_i}) #{mountain.name}"
-        end 
-    end
-    puts ""
-    puts "(To see more, enter 'next')".colorize(:green)
-    puts ""
-    puts "Enter a number:".colorize(:green)
-    puts ""
-
-    input = gets.strip
-    
-    if input.downcase == "quit"
-        quit
-    elsif input.downcase == "next"
-        puts "End of list!"
-    elsif input.to_i <= 53
-        mountain = Mountain.find(input.to_i)
-        mountain_page(mountain)
-    else
-        not_found
-        menu
-    end
-end

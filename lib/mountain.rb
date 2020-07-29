@@ -1,6 +1,6 @@
 class Mountain
 
-  attr_accessor :name, :range, :elevation, :location, :rank, :stats
+  attr_accessor :name, :range, :elevation, :prominence, :location, :rank, :stats
 
   @@all = []
   

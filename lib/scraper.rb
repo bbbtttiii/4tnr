@@ -12,12 +12,14 @@ class Scraper
             name = item.css("td:nth-of-type(2) a[title]").text
             range = item.css("td:nth-of-type(3) a[title]").text
             elevation = item.css("td:nth-of-type(4)").text.gsub!(/.*?(?=m)[m]/im, "")
+            prominence = item.css("td:nth-of-type(5)").text.gsub!(/.*?(?=m)[m]/im, "")
             location = item.css("td span.geo-dec").text
             stats = {
                 :rank => rank,
                 :name => name,
                 :range => range,
                 :elevation => elevation,
+                :prominence => prominence,
                 :location => location
             }
             list << stats
