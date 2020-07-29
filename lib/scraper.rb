@@ -1,5 +1,3 @@
-# Sole purpose is to access remote data
-
 require_relative './mountain.rb'
 
 class Scraper
@@ -22,11 +20,9 @@ class Scraper
                 :elevation => elevation,
                 :location => location
             }
-            
             list << stats
         end
         list
-
     end
     
 end

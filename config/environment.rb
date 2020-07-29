@@ -3,6 +3,7 @@ require 'httparty'
 require 'pry'
 require 'open-uri'
 require 'net/http'
+require 'colorize'
 
 
 require_relative '../lib/scraper.rb'

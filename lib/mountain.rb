@@ -1,8 +1,3 @@
-# Initialize, instance/class methods, other attributes
-# Immeditely create instances with API data
-# Keep track of all objects in a class variable
-
-
 class Mountain
 
   attr_accessor :name, :range, :elevation, :location, :rank, :stats
@@ -24,11 +19,10 @@ class Mountain
 
   def self.all
     @@all
-    # binding.pry
   end
 
-  # def self.find_by_name(input)
-  #   self.all.find{|mountain| mountain.name == input}
-  # end
+  def self.find(mountain)
+    self.all[mountain]
+  end
 
 end
