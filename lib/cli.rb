@@ -47,19 +47,26 @@ class CLI
 
         input = gets.strip
         
-        mountain = Mountain.find(input.to_i)
-        mountain_page(mountain)
+        if input.downcase == "quit"
+            quit
+        elsif input.to_i <= 53
+            mountain = Mountain.find(input.to_i)
+            mountain_page(mountain)
+        else
+            not_found
+            menu
+        end
     end
 
     def mountain_page(mountain)
         puts ""
-        puts "##{mountain.rank.to_i})" + " #{mountain.name}".colorize(:light_blue)
+        puts "##{mountain.rank.to_i}:" + " #{mountain.name}".colorize(:light_blue)
         puts ""
         puts "Elevation:".colorize(:magenta) + " #{mountain.elevation}"
         puts "Range:".colorize(:magenta) + " #{mountain.range}"
         puts "Location:".colorize(:magenta) + " #{mountain.location}"
         puts ""
-        puts "-To go back to the list, enter 'back'".colorize(:green)
+        puts "-To go back to the list, enter 'list'".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
 
         input = gets.strip
