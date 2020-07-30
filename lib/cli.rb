@@ -1,5 +1,7 @@
 class CLI 
 
+    URL = ""
+
     def run
         input = nil
         puts ""
@@ -11,24 +13,25 @@ class CLI
         puts ""
         puts "4TNR: A Colorado Fourteeners Guide".colorize(:light_blue)
         scrape
+        # add_bios
         menu
     end
 
     def menu
         puts ""
         puts "-To see all mountains, enter 'list'".colorize(:green)
+        # puts "-To see your favorites, enter 'favorites'" unless favorites_hash.length == nil
         # puts "-To go to a specific mountain, enter it below!".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
 
         input = gets.strip
 
-        # if input.to_i == valid_mountain  #find_by_name search
-        #     mountain_page
-        # else
             if input.downcase == "list"
                 print_1_to_19
             elsif input.downcase == "quit"
                 quit
+            # elsif input.downcase == "favorites"
+            #     print_favorites
             elsif input.to_i > 0 && input.to_i <= 53
                 mountain = Mountain.find(input.to_i)
                 mountain_page(mountain)
@@ -36,7 +39,7 @@ class CLI
                 not_found
                 menu
             end
-        # end
+
     end
 
     def print_1_to_19
@@ -136,7 +139,15 @@ class CLI
         puts "Prominence:".colorize(:magenta) + " #{mountain.prominence}"
         puts "Range:".colorize(:magenta) + " #{mountain.range}"
         puts "Location:".colorize(:magenta) + " #{mountain.location}"
+        # puts "Lat: #{mountain.lat}"
+        # puts "Long: #{mountain.long}"
         puts ""
+        puts mountain.mtn_url
+        puts ""
+        puts "Bio: " "#{mountain.bio}"
+        puts ""
+        # puts "-To add to favorites, enter 'add'"
+        # puts "-To view favorites, enter 'favorites'"
         puts "-To go back to the list, enter 'list'".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
 
@@ -151,21 +162,33 @@ class CLI
             end
         elsif input.downcase == "quit"
             quit
+        # elsif input.downcase == "add"
+        #     if favorites_hash.length == nil
+        #         puts "Favorites are empty!"
+        #     else
+        #         ????
+        #     end
+        # elsif input.downcase == "favorites"
+        #     print_favorites
         else
             invalid_input
             menu
         end
     end
 
-    # def search
-    #     @@all.grep(/#{input}/)
-    # end
-
-    def scrape 
-        array = Scraper.get_page
-        Mountain.create_from_scrape(array)
+    def scrape
+        info = Scraper.get_page
+        Mountain.create_from_scrape(info)
         # binding.pry
     end
+
+    # def add_bios
+    #     # binding.pry
+    #     Mountain.all.each do |mountain|
+    #       attributes = Scraper.get_bio(mountain.mtn_url)
+    #       mountain.add_mtn_bio(attributes)
+    #     end
+    # end
 
     def not_found
         puts "Sorry, I couldn't find that."
