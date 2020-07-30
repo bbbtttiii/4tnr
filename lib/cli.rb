@@ -15,6 +15,7 @@ class CLI
         scrape
         # add_bios
         menu
+        get_weather
     end
 
     def menu
@@ -139,8 +140,9 @@ class CLI
         puts "Prominence:".colorize(:magenta) + " #{mountain.prominence}"
         puts "Range:".colorize(:magenta) + " #{mountain.range}"
         puts "Location:".colorize(:magenta) + " #{mountain.location}"
-        # puts "Lat: #{mountain.lat}"
-        # puts "Long: #{mountain.long}"
+        puts "Lat: #{mountain.lat}"
+        puts "Long: #{mountain.long}"
+        puts "Weather: #{mountain.wx_temp}"
         puts ""
         puts mountain.mtn_url
         puts ""
@@ -201,6 +203,11 @@ class CLI
     def quit
        puts "Goodbye!".colorize(:red)
     end
+
+    # def get_weather(lat, long)
+    #     hash = Scraper.get_weather(lat, long)
+    #     Mountain.new
+    # end
 
 end
 
