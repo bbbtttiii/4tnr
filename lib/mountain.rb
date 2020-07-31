@@ -33,10 +33,4 @@ class Mountain
     self
   end
 
-  # def wx_storage(hash)
-  #   hash.each do |k, v|
-  #     self.send("#{k}=", v)
-  #   end
-  # end
-
 end

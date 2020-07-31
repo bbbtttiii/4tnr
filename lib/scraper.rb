@@ -39,18 +39,4 @@ class Scraper
         bios
     end
 
-    # ### Open Weather Map API ###
-
-    # @@api = "0c18824544d24985b26a355b41a3601b"
-
-    # def self.get_weather(mountain)
-    #     binding.pry
-    #     url = "api.openweathermap.org/data/2.5/weather?lat=#{mountain.lat}&lon=#{mountain.long}&appid=#{@@api}"       
-    #     uri = URI.parse(url)
-        
-    #     response = HTTParty.get(url)
-    #     weather_data = {speed: response["wind"], temp: response["main"], description: response["weather"]}
-        
-    # end
-    
 end

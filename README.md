@@ -1,7 +1,5 @@
 # 4TNR
-4TNR: A Colorado Fourteeners guide
-
-This CLI offers a catalog of Colorado's tallest mountains.
+4TNR is a CLI-based guidebook for Colorado's Fourteeners (mountains with an elevation of at least 14,000 feet).
 
 ## Getting Started
 

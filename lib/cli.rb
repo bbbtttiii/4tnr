@@ -131,7 +131,6 @@ class CLI
     end
 
     def mountain_page(mountain)
-        # add_weather
         puts ""
         puts "##{mountain.rank.to_i})".colorize(:light_blue) + " #{mountain.name}".colorize(:light_blue)
         puts ""
@@ -140,12 +139,7 @@ class CLI
         puts "      Range:".colorize(:magenta) + " #{mountain.range}"
         puts "      Location:".colorize(:magenta) + " #{mountain.location}"
         puts ""
-        puts "      -------------------------"
-        # puts "Current weather:".colorize(:light_yellow)
-        # puts ""
-        # puts "     Conditions:".colorize(:magenta) + " #{mountain.description}"
-        # puts "     Temperature:".colorize(:magenta) + " #{mountain.temp}"
-        # puts "     Wind:".colorize(:magenta) + " #{mountain.speed}"
+        puts "      -------------------------------"
         puts ""
         puts "      About #{mountain.name}".colorize(:light_yellow)
         puts ""
@@ -182,13 +176,6 @@ class CLI
           mountain.add_mtn_bio(attributes)
         end
     end
-    
-    # def add_weather
-    #     Mountain.all.each do |mountain|
-    #         weather = Scraper.get_weather(mountain)
-    #         mountain.wx_storage(weather)
-    #     end
-    # end
 
     def not_found
         puts "Sorry, I couldn't find that."
