@@ -39,16 +39,16 @@ class Scraper
         bios
     end
 
-    # @@api = "0c18824544d24985b26a355b41a3601b"
+    @@api = "0c18824544d24985b26a355b41a3601b"
 
-    # def self.get_weather(lat, long)
+    def self.get_weather(lat, long)
     
-    # url = "api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{long}&appid=#{@@api}"       
-    #     uri = URI.parse(URL)
-    #     response = HTTParty.get(url)
+    url = "api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{long}&appid=#{@@api}"       
+        uri = URI.parse(URL)
+        response = HTTParty.get(url)
         
-    #     Mountain.new({speed: response["wind"], temp: response["main"]})
+        Mountain.new({speed: response["wind"], temp: response["main"]})
 
-    # end
+    end
     
 end
