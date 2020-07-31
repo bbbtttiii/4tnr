@@ -5,17 +5,17 @@ This CLI offers a catalog of Colorado's tallest mountains.
 
 ## Getting Started
 
-Once all files are downloaded, run
+Once all files are downloaded, run:
 
     bundle install
 
-To start the program, run
+To start the program, run:
 
     ruby bin/run
 
 ## Features
 
-Navigate to a specific mountain to view:
+Follow the menu and navigate to a specific mountain to view:
  - Rank
  - Range
  - Elevation
