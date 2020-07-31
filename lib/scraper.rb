@@ -1,5 +1,3 @@
-require_relative './mountain.rb'
-
 class Scraper
 
     def self.get_page
@@ -29,7 +27,6 @@ class Scraper
                 :mtn_url => mtn_url
             }
             list << stats
-            # binding.pry
         end
         list
     end
@@ -40,7 +37,6 @@ class Scraper
         mtn_page = Nokogiri::HTML(open(base_url + mtn_url))
         bios[:bio] = mtn_page.css("p:nth-of-type(1), p:nth-of-type(2)").text
         bios
-        # binding.pry
     end
 
     # @@api = "0c18824544d24985b26a355b41a3601b"
