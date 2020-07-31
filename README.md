@@ -31,7 +31,8 @@ Navigate to a specific mountain to view:
 
 ## Built With
 
-[Nokogiri](https://nokogiri.org/images/nokogiri-serif-white.svg) - Web scraping
+[Nokogiri](https://nokogiri.org) - Web scraping
+
 [Colorize](https://github.com/fazibear/colorize) - Styling
 
 ## Authors
