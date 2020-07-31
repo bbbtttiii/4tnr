@@ -5,13 +5,15 @@ class CLI
     def run
         input = nil
         puts ""
-        puts "    _  _ _____ _   _ ____      ".colorize(:light_blue)
-        puts "   | || |_   _| \\ | |  _ \\   ".colorize(:light_blue)
-        puts "   | || |_| | |  \\| | |_| |   ".colorize(:light_blue)
-        puts "   |__   _| | | |\\  |  _ <    ".colorize(:light_blue)
-        puts "      |_| |_| |_| \\_|_| \\_\\ ".colorize(:light_blue)
+        puts "     _  _ _____ _   _ ____      ".colorize(:light_blue)
+        puts "    | || |_   _| \\ | |  _ \\   ".colorize(:light_blue)
+        puts "    | || |_| | |  \\| | |_| |   ".colorize(:light_blue)
+        puts "    |__   _| | | |\\  |  _ <    ".colorize(:light_blue)
+        puts "       |_| |_| |_| \\_|_| \\_\\ ".colorize(:light_blue)
         puts ""
-        puts "4TNR: A Colorado Fourteeners Guide".colorize(:light_blue)
+        puts "4TNR: A Colorado Fourteeners Guide".colorize(:light_yellow)
+        puts ""
+        loading
         scrape
         add_bios
         menu
@@ -136,17 +138,15 @@ class CLI
         puts ""
         puts "##{mountain.rank.to_i}:" + " #{mountain.name}".colorize(:light_blue)
         puts ""
-        puts "Elevation:".colorize(:magenta) + " #{mountain.elevation}"
-        puts "Prominence:".colorize(:magenta) + " #{mountain.prominence}"
-        puts "Range:".colorize(:magenta) + " #{mountain.range}"
-        puts "Location:".colorize(:magenta) + " #{mountain.location}"
-        puts "Lat: #{mountain.lat}"
-        puts "Long: #{mountain.long}"
+        puts "      Elevation:".colorize(:magenta) + " #{mountain.elevation}"
+        puts "      Prominence:".colorize(:magenta) + " #{mountain.prominence}"
+        puts "      Range:".colorize(:magenta) + " #{mountain.range}"
+        puts "      Location:".colorize(:magenta) + " #{mountain.location}"
+        puts "      Lat: #{mountain.lat}"
+        puts "      Long: #{mountain.long}"
         # print_wx
         puts ""
-        puts mountain.mtn_url
-        puts ""
-        puts "Bio: " "#{mountain.bio}"
+        puts "      #{mountain.bio}".gsub(/\[.*?\]/, "")
         puts ""
         # puts "-To add to favorites, enter 'add'"
         # puts "-To view favorites, enter 'favorites'"
@@ -212,6 +212,22 @@ class CLI
     # def print_wx(lat, long)
         
     # end
+
+    def loading
+        spinner = Enumerator.new do |e|
+            loop do
+              e.yield '|'
+              e.yield '/'
+              e.yield '-'
+              e.yield '\\'
+            end
+          end
+          
+          1.upto(100) do |i|
+            printf("\rLoading... %s", spinner.next)
+            sleep(0.1)
+          end
+    end
 
 end
 
