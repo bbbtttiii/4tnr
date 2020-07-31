@@ -15,32 +15,29 @@ class CLI
         scrape
         add_bios
         menu
-        # get_weather
     end
 
     def menu
         puts ""
-        puts "Hello!".colorize(:green)
         puts "-To see all mountains, enter 'list'".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
 
         input = gets.strip
-
-            if input.downcase == "list"
-                print_1_to_19
-            elsif input.downcase == "quit"
-                quit
-            elsif input.to_i > 0 && input.to_i <= 53
-                mountain = Mountain.find(input.to_i)
-                mountain_page(mountain)
-            else
-                not_found
-                menu
-            end
-
+        if input.downcase == "list"
+            print_1_to_19
+        elsif input.downcase == "quit"
+            quit
+        elsif input.to_i > 0 && input.to_i <= 53
+            mountain = Mountain.find(input.to_i)
+            mountain_page(mountain)
+        else
+            not_found
+            menu
+        end
     end
 
     def print_1_to_19
+        puts ""
         Mountain.all.each do |mountain|
             if mountain.rank.to_i >= 1 && mountain.rank.to_i <= 19
                 puts "##{mountain.rank.to_i}) #{mountain.name}"
@@ -71,6 +68,7 @@ class CLI
     end
 
     def print_20_to_39
+        puts ""
         Mountain.all.each do |mountain|
             if mountain.rank.to_i >= 20 && mountain.rank.to_i <= 39
                 puts "##{mountain.rank.to_i}) #{mountain.name}"
@@ -102,6 +100,7 @@ class CLI
     end
     
     def print_40_to_53
+        puts ""
         Mountain.all.each do |mountain|
             if mountain.rank.to_i > 39
                 puts "##{mountain.rank.to_i}) #{mountain.name}"
@@ -132,22 +131,25 @@ class CLI
     end
 
     def mountain_page(mountain)
+        # add_weather
         puts ""
         puts "##{mountain.rank.to_i})".colorize(:light_blue) + " #{mountain.name}".colorize(:light_blue)
         puts ""
-        puts "     Elevation:".colorize(:magenta) + " #{mountain.elevation}"
-        puts "     Prominence:".colorize(:magenta) + " #{mountain.prominence}"
-        puts "     Range:".colorize(:magenta) + " #{mountain.range}"
-        puts "     Location:".colorize(:magenta) + " #{mountain.location}"
-        # puts "      Lat: #{mountain.lat}"
-        # puts "      Long: #{mountain.long}"
+        puts "      Elevation:".colorize(:magenta) + " #{mountain.elevation}"
+        puts "      Prominence:".colorize(:magenta) + " #{mountain.prominence}"
+        puts "      Range:".colorize(:magenta) + " #{mountain.range}"
+        puts "      Location:".colorize(:magenta) + " #{mountain.location}"
         puts ""
-        puts "Current weather conditions:".colorize(:light_yellow)
+        puts "      -------------------------"
+        # puts "Current weather:".colorize(:light_yellow)
+        # puts ""
+        # puts "     Conditions:".colorize(:magenta) + " #{mountain.description}"
+        # puts "     Temperature:".colorize(:magenta) + " #{mountain.temp}"
+        # puts "     Wind:".colorize(:magenta) + " #{mountain.speed}"
         puts ""
-        puts "     Temperature:".colorize(:magenta) + " #{mountain.temp}"
-        puts "     Wind:".colorize(:magenta) + " #{mountain.speed}"
+        puts "      About #{mountain.name}".colorize(:light_yellow)
         puts ""
-        puts "#{mountain.bio}".gsub(/\[.*?\]/, "")
+        puts "      #{mountain.bio}".gsub(/\[.*?\]/, "")
         puts ""
         puts "-To go back to the list, enter 'list'".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
@@ -180,6 +182,13 @@ class CLI
           mountain.add_mtn_bio(attributes)
         end
     end
+    
+    # def add_weather
+    #     Mountain.all.each do |mountain|
+    #         weather = Scraper.get_weather(mountain)
+    #         mountain.wx_storage(weather)
+    #     end
+    # end
 
     def not_found
         puts "Sorry, I couldn't find that."
@@ -192,15 +201,5 @@ class CLI
     def quit
        puts "Goodbye!".colorize(:red)
     end
-
-    def get_weather(lat, long)
-        hash = Scraper.get_weather(lat, long)
-        Mountain.new(hash)
-    end
-
-    # def print_wx(lat, long)
-    #     puts "Current temperature:" 
-    #     puts "Current wind:"
-    # end
 
 end

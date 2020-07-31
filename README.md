@@ -5,11 +5,13 @@ This CLI offers a catalog of Colorado's tallest mountains.
 
 ## Getting Started
 
-    gem install nokogiri
+Once all files are downloaded, run
 
-    gem install httparty
+    bundle install
 
-    gem install colorize
+To start the program, run
+
+    ruby bin/run
 
 ## Features
 

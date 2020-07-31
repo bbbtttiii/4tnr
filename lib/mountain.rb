@@ -1,15 +1,19 @@
 class Mountain
 
-  attr_accessor :name, :range, :elevation, :prominence, :location, :rank, :stats,
-                :lat, :long, :mtn_url, :bio, :speed, :temp
+  attr_accessor :name, :range, :elevation, :prominence, :location, :rank,
+                :stats, :lat, :long, :mtn_url, :bio, :speed, :temp, :description
   
   @@all = []
-  
+
   def initialize(hash)
     hash.each do |k, v|
       self.send("#{k}=", v)
     end
     @@all << self
+  end
+  
+  def self.all
+    @@all
   end
     
   def self.create_from_scrape(list)
@@ -18,19 +22,21 @@ class Mountain
     end
   end
 
-  def self.all
-    @@all
-  end
-
   def self.find(mountain)
     self.all[mountain]
   end
 
-  def add_mtn_bio(bios)
-    bios.each do |key, val|
-      self.send("#{key}=", val)
+  def add_mtn_bio(bio_hash)
+    bio_hash.each do |k, v|
+      self.send("#{k}=", v)
     end
     self
   end
+
+  # def wx_storage(hash)
+  #   hash.each do |k, v|
+  #     self.send("#{k}=", v)
+  #   end
+  # end
 
 end
