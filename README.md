@@ -3,14 +3,6 @@
 
 This CLI offers a catalog of Colorado's tallest mountains.
 
-## Summary
-
-[Getting started](#getting-started)
-[Features](#features)
-[Built With](#built-with)
-[Authors](#authors)
-[License](#license)
-
 ## Getting Started
 
     gem install nokogiri
