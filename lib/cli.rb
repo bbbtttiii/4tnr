@@ -11,20 +11,24 @@ class CLI
         puts ""
         puts "4TNR: A Colorado Fourteeners Guide".colorize(:light_yellow)
         puts ""
-        puts "Loading, please wait..."
+        puts "     (Loading, please wait...)"
         scrape
         add_bios
+        greeting
         menu
     end
 
     def menu
         puts ""
         puts "-To see all mountains, enter 'list'".colorize(:green)
+        puts "-To view the resources page, enter 'links'".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
 
         input = gets.strip
         if input.downcase == "list"
             print_1_to_19
+        elsif input.downcase == "links"
+            links_page
         elsif input.downcase == "quit"
             quit
         elsif input.to_i > 0 && input.to_i <= 53
@@ -56,6 +60,8 @@ class CLI
             quit
         elsif input.downcase == "next"
             print_20_to_39
+        elsif input.downcase == "links"
+            links_page
         elsif input.downcase == "list"
             print_1_to_19
         elsif input.to_i >= 1 && input.to_i <= 53
@@ -88,6 +94,8 @@ class CLI
             quit
         elsif input.downcase == "next"
             print_40_to_53
+        elsif input.downcase == "links"
+            links_page
         elsif input.downcase == "back"
             print_1_to_19
         elsif input.to_i >= 1 && input.to_i <= 53
@@ -116,10 +124,12 @@ class CLI
         input = gets.strip
         if input.downcase == "quit"
             quit
+        elsif input.downcase == "links"
+            links_page
         elsif input.downcase == "back"
             print_20_to_39
         elsif input.downcase == "next"
-            puts "End of list!"
+            puts "End of list!".colorize(:magenta)
             menu
         elsif input.to_i >= 1 && input.to_i <= 53
             mountain = Mountain.find(input.to_i)
@@ -132,14 +142,14 @@ class CLI
 
     def mountain_page(mountain)
         puts ""
-        puts "##{mountain.rank.to_i})".colorize(:light_blue) + " #{mountain.name}".colorize(:light_blue)
+        puts ""
+        puts "##{mountain.rank.to_i}".colorize(:light_blue) + "    #{mountain.name}".colorize(:light_blue)
         puts ""
         puts "      Elevation:".colorize(:magenta) + " #{mountain.elevation}"
         puts "      Prominence:".colorize(:magenta) + " #{mountain.prominence}"
         puts "      Range:".colorize(:magenta) + " #{mountain.range}"
         puts "      Location:".colorize(:magenta) + " #{mountain.location}"
-        puts ""
-        puts "      -------------------------------"
+        puts "      _______________________________"
         puts ""
         puts "      About #{mountain.name}".colorize(:light_yellow)
         puts ""
@@ -174,6 +184,36 @@ class CLI
         Mountain.all.each do |mountain|
           attributes = Scraper.get_bio(mountain.mtn_url)
           mountain.add_mtn_bio(attributes)
+        end
+    end
+
+    def greeting
+        puts ""
+        puts "Hi! What's your name?".colorize(:magenta)
+        input = gets.strip
+        puts "Welcome to 4TNR, #{input}.".colorize(:green)
+    end
+
+    def links_page
+        puts ""
+        puts "-------------------".colorize(:light_yellow)
+        puts "| Further Reading |".colorize(:light_yellow)
+        puts "-------------------".colorize(:light_yellow)
+        puts ""
+        puts "Photo gallery of popular 14ers:" + "      https://en.wikipedia.org/wiki/List_of_Colorado_fourteeners#gallery".colorize(:light_blue)
+        puts "Map of all listed mountains:" + "         https://osm4wiki.toolforge.org/cgi-bin/wiki/wiki-osm.pl?project=en&article=List_of_Colorado_fourteeners".colorize(:light_blue)
+        puts "Popular hiking routes:" + "               https://www.14ers.com/routes.php".colorize(:light_blue)
+        puts ""
+        puts "To go back to the menu, enter 'back'".colorize(:green)
+
+        input = gets.strip
+        if input.downcase == "back"
+            menu
+        elsif input.downcase == "quit"
+            quit
+        else
+            invalid_input
+            menu
         end
     end
 
