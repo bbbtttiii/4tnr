@@ -1,6 +1,6 @@
 class CLI 
 
-    URL = ""
+    # URL = ""
 
     def run
         input = nil
@@ -13,9 +13,9 @@ class CLI
         puts ""
         puts "4TNR: A Colorado Fourteeners Guide".colorize(:light_blue)
         scrape
-        # add_bios
+        add_bios
         menu
-        get_weather
+        # get_weather
     end
 
     def menu
@@ -142,7 +142,7 @@ class CLI
         puts "Location:".colorize(:magenta) + " #{mountain.location}"
         puts "Lat: #{mountain.lat}"
         puts "Long: #{mountain.long}"
-        puts "Weather: #{mountain.wx_temp}"
+        # print_wx
         puts ""
         puts mountain.mtn_url
         puts ""
@@ -184,13 +184,13 @@ class CLI
         # binding.pry
     end
 
-    # def add_bios
-    #     # binding.pry
-    #     Mountain.all.each do |mountain|
-    #       attributes = Scraper.get_bio(mountain.mtn_url)
-    #       mountain.add_mtn_bio(attributes)
-    #     end
-    # end
+    def add_bios
+        # binding.pry
+        Mountain.all.each do |mountain|
+          attributes = Scraper.get_bio(mountain.mtn_url)
+          mountain.add_mtn_bio(attributes)
+        end
+    end
 
     def not_found
         puts "Sorry, I couldn't find that."
@@ -206,7 +206,11 @@ class CLI
 
     # def get_weather(lat, long)
     #     hash = Scraper.get_weather(lat, long)
-    #     Mountain.new
+    #     Mountain.new(hash)
+    # end
+
+    # def print_wx(lat, long)
+        
     # end
 
 end

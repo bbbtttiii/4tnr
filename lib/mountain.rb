@@ -1,7 +1,7 @@
 class Mountain
 
   attr_accessor :name, :range, :elevation, :prominence, :location, :rank, :stats,
-                :lat, :long, :mtn_url, :bio, :wx_name, :wx_temp
+                :lat, :long, :mtn_url, :bio, :speed, :temp
   
   @@all = []
   
@@ -26,9 +26,9 @@ class Mountain
     self.all[mountain]
   end
 
-  def add_mtn_bio(attributes_hash)
-    attributes_hash.each do |k, v|
-      self.send("#{k}=", v)
+  def add_mtn_bio(bios)
+    bios.each do |key, val|
+      self.send("#{key}=", val)
     end
     self
   end
