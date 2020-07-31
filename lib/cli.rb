@@ -52,6 +52,7 @@ class CLI
             end 
         end
 
+        puts "..."
         puts ""
         puts "To see more, enter 'next'".colorize(:green)
         puts ""
@@ -81,6 +82,7 @@ class CLI
             end 
         end
     
+        puts "..."
         puts ""
         puts "To see more, enter 'next'".colorize(:green)
         puts "To go back, enter 'back'".colorize(:green)
@@ -136,17 +138,17 @@ class CLI
 
     def mountain_page(mountain)
         puts ""
-        puts "##{mountain.rank.to_i}:" + " #{mountain.name}".colorize(:light_blue)
+        puts "##{mountain.rank.to_i})" + " #{mountain.name}".colorize(:light_blue)
         puts ""
-        puts "      Elevation:".colorize(:magenta) + " #{mountain.elevation}"
-        puts "      Prominence:".colorize(:magenta) + " #{mountain.prominence}"
-        puts "      Range:".colorize(:magenta) + " #{mountain.range}"
-        puts "      Location:".colorize(:magenta) + " #{mountain.location}"
-        puts "      Lat: #{mountain.lat}"
-        puts "      Long: #{mountain.long}"
+        puts "     Elevation:".colorize(:magenta) + " #{mountain.elevation}"
+        puts "     Prominence:".colorize(:magenta) + " #{mountain.prominence}"
+        puts "     Range:".colorize(:magenta) + " #{mountain.range}"
+        puts "     Location:".colorize(:magenta) + " #{mountain.location}"
+        # puts "      Lat: #{mountain.lat}"
+        # puts "      Long: #{mountain.long}"
         # print_wx
         puts ""
-        puts "      #{mountain.bio}".gsub(/\[.*?\]/, "")
+        puts "     #{mountain.bio}".gsub(/\[.*?\]/, "")
         puts ""
         # puts "-To add to favorites, enter 'add'"
         # puts "-To view favorites, enter 'favorites'"
@@ -223,7 +225,7 @@ class CLI
             end
           end
           
-          1.upto(100) do |i|
+          1.upto(200) do |i|
             printf("\rLoading... %s", spinner.next)
             sleep(0.1)
           end
