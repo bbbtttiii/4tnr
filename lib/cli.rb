@@ -12,7 +12,7 @@ class CLI
         puts "4TNR: A Colorado Fourteeners Guide".colorize(:light_yellow)
         puts ""
         puts "     (Loading, please wait...)"
-        scrape
+        scrape_page
         add_bios
         greeting
         menu
@@ -157,7 +157,10 @@ class CLI
         puts ""
         puts "-To go back to the list, enter 'list'".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
+        mountain_page_input(mountain)
+    end
 
+    def mountain_page_input(mountain)
         input = gets.strip
         if input.downcase == "list"
             if (mountain.rank.to_i >= 1 && mountain.rank.to_i <= 19)
@@ -175,7 +178,7 @@ class CLI
         end
     end
 
-    def scrape
+    def scrape_page
         info = Scraper.get_page
         Mountain.create_from_scrape(info)
     end

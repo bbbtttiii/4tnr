@@ -9,8 +9,8 @@ class Scraper
             rank = item.css("td:nth-of-type(1)").text.strip
             name = item.css("td:nth-of-type(2) a[title]").text
             range = item.css("td:nth-of-type(3) a[title]").text
-            elevation = item.css("td:nth-of-type(4)").text.gsub!(/.*?(?=m)[m]/im, "")
-            prominence = item.css("td:nth-of-type(5)").text.gsub!(/.*?(?=m)[m]/im, "")
+            elevation = item.css("td:nth-of-type(4)").text.gsub(/.*?(?=m)[m]/im, "")
+            prominence = item.css("td:nth-of-type(5)").text.gsub(/.*?(?=m)[m]/im, "")
             location = item.css("td span.geo-dec").text
             lat = item.css("td span.geo-dec").text.split("°")[0]
             long = item.css("td span.geo-dec").text.match(/(?<=\s).*[\d]/).to_s
@@ -35,7 +35,7 @@ class Scraper
         bios = {}
         base_url = "https://en.wikipedia.org"
         mtn_page = Nokogiri::HTML(open(base_url + mtn_url))
-        bios[:bio] = mtn_page.css("p:nth-of-type(1), p:nth-of-type(2)").text
+        bios[:bio] = mtn_page.css("p:nth-of-type(1), p:nth-of-type(2)").text.gsub(/\[.*?\]/, "")
         bios
     end
 
