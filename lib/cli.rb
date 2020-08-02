@@ -189,18 +189,20 @@ class CLI
         end
     end
 
-    #creates new instance of Scraper class, sets equal to variable "info"
-    #then, creates new instance of Mountain class, using create_from_scrape with the 
+    #calls .get_page from Scraper class to create initial list, set to var "info"
+    #then, calls .create_from_scrape in Mountain class
     def scrape_page
         info = Scraper.get_page
         Mountain.create_from_scrape(info)
     end
 
-
+    #iterates over @@all array- For each mountain,
+    #calls .get_bio from Scraper (given that mountain and its url attribute), set to var "bios"
+    #calls add_mtn_bio from Mountain class to return hash with each mountain's bio
     def add_bios
         Mountain.all.each do |mountain|
-          attributes = Scraper.get_bio(mountain.mtn_url)
-          mountain.add_mtn_bio(attributes)
+          bios = Scraper.get_bio(mountain.mtn_url)
+          mountain.add_mtn_bio(bios)
         end
     end
 

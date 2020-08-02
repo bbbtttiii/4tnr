@@ -15,8 +15,6 @@ class Scraper
             elevation = item.css("td:nth-of-type(4)").text.gsub(/.*?(?=m)[m]/im, "")
             prominence = item.css("td:nth-of-type(5)").text.gsub(/.*?(?=m)[m]/im, "")
             location = item.css("td span.geo-dec").text
-            lat = item.css("td span.geo-dec").text.split("°")[0]
-            long = item.css("td span.geo-dec").text.match(/(?<=\s).*[\d]/).to_s
             mtn_url = item.css("td:nth-of-type(2) a[title]").attribute("href").to_s
             #assign the variables as hash values to hash key symbols
             stats = {
@@ -26,8 +24,6 @@ class Scraper
                 :elevation => elevation,
                 :prominence => prominence,
                 :location => location,
-                :lat => lat,
-                :long => long,
                 :mtn_url => mtn_url
             }
             #adds the hash to the empty list array
