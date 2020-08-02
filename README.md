@@ -20,6 +20,7 @@ Follow the menu and navigate to a specific mountain to view:
  - Prominence
  - Location (lat/long)
  - A short bio
+ - A page with links for further reading
 
 ## Built With
 
