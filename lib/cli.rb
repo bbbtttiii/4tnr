@@ -1,6 +1,7 @@
 class CLI 
 
     def run
+        #clears initial input
         input = nil
         puts ""
         puts "     _  _ _____ _   _ ____      ".colorize(:light_blue)
@@ -24,6 +25,7 @@ class CLI
         puts "-To view the resources page, enter 'links'".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
 
+        #sets var "input" to user's input (gets) + .strip removes any leading/trailing whitespace
         input = gets.strip
         if input.downcase == "list"
             print_1_to_19
@@ -31,14 +33,20 @@ class CLI
             links_page
         elsif input.downcase == "quit"
             quit
+        #if mountain is valid, call find method on mountain class based on user's input
+        #then use that input to create the mountain page
         elsif input.to_i > 0 && input.to_i <= 53
-            mountain = Mountain.find(input.to_i)
+            mountain = Mountain.search(input.to_i)
             mountain_page(mountain)
         else
             not_found
             menu
         end
     end
+
+        #print methods-
+        #invoke .all on a mountain instance and iterates over each one
+        #only prints mountain ranks within the specified range
 
     def print_1_to_19
         puts ""
@@ -65,7 +73,7 @@ class CLI
         elsif input.downcase == "list"
             print_1_to_19
         elsif input.to_i >= 1 && input.to_i <= 53
-            mountain = Mountain.find(input.to_i)
+            mountain = Mountain.search(input.to_i)
             mountain_page(mountain)
         else
             not_found
@@ -99,7 +107,7 @@ class CLI
         elsif input.downcase == "back"
             print_1_to_19
         elsif input.to_i >= 1 && input.to_i <= 53
-            mountain = Mountain.find(input.to_i)
+            mountain = Mountain.search(input.to_i)
             mountain_page(mountain)
         else
             not_found
@@ -132,7 +140,7 @@ class CLI
             puts "End of list!".colorize(:magenta)
             menu
         elsif input.to_i >= 1 && input.to_i <= 53
-            mountain = Mountain.find(input.to_i)
+            mountain = Mountain.search(input.to_i)
             mountain_page(mountain)
         else
             not_found
@@ -143,26 +151,27 @@ class CLI
     def mountain_page(mountain)
         puts ""
         puts ""
-        puts "##{mountain.rank.to_i}".colorize(:light_blue) + "    #{mountain.name}".colorize(:light_blue)
+        puts "##{mountain.rank.to_i}".colorize(:light_blue) + "   #{mountain.name}".colorize(:light_blue)
         puts ""
-        puts "      Elevation:".colorize(:magenta) + " #{mountain.elevation}"
-        puts "      Prominence:".colorize(:magenta) + " #{mountain.prominence}"
-        puts "      Range:".colorize(:magenta) + " #{mountain.range}"
-        puts "      Location:".colorize(:magenta) + " #{mountain.location}"
-        puts "      _______________________________"
+        puts "     Elevation:".colorize(:magenta) + " #{mountain.elevation}"
+        puts "     Prominence:".colorize(:magenta) + " #{mountain.prominence}"
+        puts "     Range:".colorize(:magenta) + " #{mountain.range}"
+        puts "     Location:".colorize(:magenta) + " #{mountain.location}"
+        puts "     _______________________________"
         puts ""
-        puts "      About #{mountain.name}".colorize(:light_yellow)
+        puts "     About #{mountain.name}".colorize(:light_yellow)
         puts ""
-        puts "      #{mountain.bio}".gsub(/\[.*?\]/, "")
+        puts "     #{mountain.bio}"
         puts ""
-        puts "-To go back to the list, enter 'list'".colorize(:green)
+        puts "-To go back to the list, enter 'back'".colorize(:green)
+        puts "-To view the resources page, enter 'links'".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
         mountain_page_input(mountain)
     end
 
     def mountain_page_input(mountain)
         input = gets.strip
-        if input.downcase == "list"
+        if input.downcase == "back"
             if (mountain.rank.to_i >= 1 && mountain.rank.to_i <= 19)
                 print_1_to_19
             elsif (mountain.rank.to_i >= 20 && mountain.rank.to_i <= 39)
@@ -172,16 +181,21 @@ class CLI
             end
         elsif input.downcase == "quit"
             quit
+        elsif input.downcase == "links"
+            links_page
         else
             invalid_input
             menu
         end
     end
 
+    #creates new instance of Scraper class, sets equal to variable "info"
+    #then, creates new instance of Mountain class, using create_from_scrape with the 
     def scrape_page
         info = Scraper.get_page
         Mountain.create_from_scrape(info)
     end
+
 
     def add_bios
         Mountain.all.each do |mountain|

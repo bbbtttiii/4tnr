@@ -1,10 +1,13 @@
 class Scraper
 
+    #class method
+    #iterates through the wikipedia table and returns an array "list" of attributes in key/val pairs
     def self.get_page
         url = "https://en.wikipedia.org/wiki/List_of_Colorado_fourteeners"
         page = Nokogiri::HTML(open(url))
         list = []
         
+        #iterate through each tr element in the table, assigning attributes variables to certain tds
         page.css(".wikitable tbody tr").each.with_index do |item|
             rank = item.css("td:nth-of-type(1)").text.strip
             name = item.css("td:nth-of-type(2) a[title]").text
@@ -15,6 +18,7 @@ class Scraper
             lat = item.css("td span.geo-dec").text.split("°")[0]
             long = item.css("td span.geo-dec").text.match(/(?<=\s).*[\d]/).to_s
             mtn_url = item.css("td:nth-of-type(2) a[title]").attribute("href").to_s
+            #assign the variables as hash values to hash key symbols
             stats = {
                 :rank => rank,
                 :name => name,
@@ -26,11 +30,17 @@ class Scraper
                 :long => long,
                 :mtn_url => mtn_url
             }
+            #adds the hash to the empty list array
             list << stats
         end
+        #returns the list array
         list
     end
 
+    #class method
+    #takes in mtn_url as argument which is used to identify the wiki to scrape
+    #adds the paragraphs from a mountain's wiki to the "bios" hash, assigning it to "bio" key
+    #returns the hash
     def self.get_bio(mtn_url)
         bios = {}
         base_url = "https://en.wikipedia.org"
