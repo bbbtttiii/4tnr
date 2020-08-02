@@ -28,6 +28,10 @@ Follow the menu and navigate to a specific mountain to view:
 
 [Colorize](https://github.com/fazibear/colorize) - Styling
 
+## Contributing
+
+Feel free to create a pull request if you have any ideas for expansion or improvement!
+
 ## Authors
 
 - Ben Iburg (https://github.com/bbbtttiii)
