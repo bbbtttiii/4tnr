@@ -17,6 +17,12 @@ class Mountain
   #class variable array which stores all attributes AFTER they are scraped (as per the initializer)
   @@all = []
 
+  #send calls the method name (key) with an argument of the value and dynamically assigns them
+  #ex:
+  #{:rank=>"1", :name=>"Mount Elbert", :range=>"Sawatch Range", :elevation=>"14,440 ft", :prominence=>"9,093 ft", :location=>"39.1178°N 106.4454°W", :mtn_url=>"/wiki/Mount_Elbert"}
+  #etc.
+
+
   #initializes by assigning all attributes each time a new Mountain instance is created
   def initialize(hash)
     hash.each do |k, v|
@@ -41,17 +47,8 @@ class Mountain
   def self.create_from_scrape(list)
     list.each do |mtn_hash|
       Mountain.new(mtn_hash)
+      # binding.pry
     end
-
-  end
-
-  #takes in bio_hash as argument, iterates over the key/val pairs from scraped hash
-  #assigns Mountain class each key/value pair and returns self (Mountain)
-  def add_mtn_bio(bio_hash)
-    bio_hash.each do |k, v|
-      self.send("#{k}=", v)
-    end
-    self
   end
 
 end

@@ -36,13 +36,11 @@ class Scraper
     #class method
     #takes in mtn_url as argument which is used to identify the wiki to scrape
     #adds the paragraphs from a mountain's wiki to the "bios" hash, assigning it to "bio" key
-    #returns the hash
     def self.get_bio(mtn_url)
-        bios = {}
+        bio_hash = {}
         base_url = "https://en.wikipedia.org"
         mtn_page = Nokogiri::HTML(open(base_url + mtn_url))
-        bios[:bio] = mtn_page.css("p:nth-of-type(1), p:nth-of-type(2)").text.gsub(/\[.*?\]/, "")
-        bios
+        bio_hash[:bio] = mtn_page.css("p:nth-of-type(1), p:nth-of-type(2)").text.gsub(/\[.*?\]/, "")
     end
 
 end

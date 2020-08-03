@@ -14,7 +14,7 @@ class CLI
         puts ""
         puts "     (Loading, please wait...)"
         scrape_page
-        add_bios
+        # add_bios
         greeting
         menu
     end
@@ -149,6 +149,7 @@ class CLI
     end
 
     def mountain_page(mountain)
+
         puts ""
         puts ""
         puts "##{mountain.rank.to_i}".colorize(:light_blue) + "   #{mountain.name}".colorize(:light_blue)
@@ -161,7 +162,7 @@ class CLI
         puts ""
         puts "     About #{mountain.name}".colorize(:light_yellow)
         puts ""
-        puts "     #{mountain.bio}"
+        puts "     #{add_bio(mountain)}"
         puts ""
         puts "-To go back to the list, enter 'back'".colorize(:green)
         puts "-To view the resources page, enter 'links'".colorize(:green)
@@ -196,14 +197,10 @@ class CLI
         Mountain.create_from_scrape(info)
     end
 
-    #iterates over @@all array- For each mountain,
-    #calls .get_bio from Scraper (given that mountain and its url attribute), set to var "bios"
-    #calls add_mtn_bio from Mountain class to return hash with each mountain's bio
-    def add_bios
-        Mountain.all.each do |mountain|
-          bios = Scraper.get_bio(mountain.mtn_url)
-          mountain.add_mtn_bio(bios)
-        end
+    #calls get_bio method on Scraper class, taking in a mountain with its url as an arg
+    def add_bio(mountain)
+        bio = Scraper.get_bio(mountain.mtn_url)
+        # binding.pry
     end
 
     def greeting
@@ -245,7 +242,9 @@ class CLI
     end
 
     def quit
-       puts "Goodbye!".colorize(:red)
+        puts ""
+        puts "Goodbye!".colorize(:red)
+        puts ""
     end
 
 end
