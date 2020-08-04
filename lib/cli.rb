@@ -1,7 +1,6 @@
 class CLI 
 
     def run
-        #clears initial input
         input = nil
         puts ""
         puts "     _  _ _____ _   _ ____      ".colorize(:light_blue)
@@ -14,7 +13,6 @@ class CLI
         puts ""
         puts "     (Loading, please wait...)"
         scrape_page
-        # add_bios
         greeting
         menu
     end
@@ -25,7 +23,6 @@ class CLI
         puts "-To view the resources page, enter 'links'".colorize(:green)
         puts "-To exit, enter 'quit'".colorize(:green)
 
-        #sets var "input" to user's input (gets) + .strip removes any leading/trailing whitespace
         input = gets.strip
         if input.downcase == "list"
             print_1_to_19
@@ -200,7 +197,6 @@ class CLI
     #calls get_bio method on Scraper class, taking in a mountain with its url as an arg
     def add_bio(mountain)
         bio = Scraper.get_bio(mountain.mtn_url)
-        # binding.pry
     end
 
     def greeting

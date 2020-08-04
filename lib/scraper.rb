@@ -1,6 +1,5 @@
 class Scraper
 
-    #class method
     #iterates through the wikipedia table and returns an array "list" of attributes in key/val pairs
     def self.get_page
         url = "https://en.wikipedia.org/wiki/List_of_Colorado_fourteeners"
@@ -26,14 +25,11 @@ class Scraper
                 :location => location,
                 :mtn_url => mtn_url
             }
-            #adds the hash to the empty list array
             list << stats
         end
-        #returns the list array
         list
     end
 
-    #class method
     #takes in mtn_url as argument which is used to identify the wiki to scrape
     #adds the paragraphs from a mountain's wiki to the "bios" hash, assigning it to "bio" key
     def self.get_bio(mtn_url)
