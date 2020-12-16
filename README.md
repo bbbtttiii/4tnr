@@ -1,6 +1,8 @@
 # 4tnr
 4tnr is a CLI-based guidebook for Colorado's Fourteeners (mountains with an elevation of at least 14,000 feet).
 
+![](4tnr.gif)
+
 ## Getting Started
 
 Once all files are downloaded, run:
