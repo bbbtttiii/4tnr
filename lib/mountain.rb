@@ -1,9 +1,9 @@
 class Mountain
 
   attr_accessor :name, :range, :elevation, :prominence, :location, :rank,
-                :stats, :mtn_url, :bio, :speed, :temp, :description
+                :stats, :mtn_url, :bio, :temp, :description
   
-  #class variable array which stores all attributes AFTER they are scraped (as per the initializer)
+  #array which stores all attributes after they are scraped (as per the initializer)
   @@all = []
 
   #send calls the method name (key) with an argument of the value and dynamically assigns them
