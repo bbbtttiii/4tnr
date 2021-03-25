@@ -1,7 +1,7 @@
 # 4tnr
 4tnr is a CLI-based guidebook for Colorado's Fourteeners.
 
-![](4tnr.gif)
+![](img/4tnr.gif)
 
 ## Getting Started
 
