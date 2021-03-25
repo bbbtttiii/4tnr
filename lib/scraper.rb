@@ -3,7 +3,7 @@ class Scraper
   #iterates through the wikipedia table and returns an array "list" of attributes in key/val pairs
   def self.get_page
     url = "https://en.wikipedia.org/wiki/List_of_Colorado_fourteeners"
-    page = Nokogiri::HTML(open(url))
+    page = Nokogiri::HTML(URI.open(url))
     list = []
       
     #iterate through each tr element in the table, assigning attributes variables to certain tds
@@ -35,7 +35,7 @@ class Scraper
   def self.get_bio(mtn_url)
     bio_hash = {}
     base_url = "https://en.wikipedia.org"
-    mtn_page = Nokogiri::HTML(open(base_url + mtn_url))
+    mtn_page = Nokogiri::HTML(URI.open(base_url + mtn_url))
     bio_hash[:bio] = mtn_page.css("p:nth-of-type(1), p:nth-of-type(2)").text.gsub(/\[.*?\]/, "")
   end
 
