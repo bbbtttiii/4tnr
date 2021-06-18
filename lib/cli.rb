@@ -41,10 +41,6 @@ class CLI
     end
   end
 
-    #print methods-
-    #invoke .all on a mountain instance and iterates over each one
-    #only prints mountain ranks within the specified range
-
   def print_1_to_19
     puts ""
     Mountain.all.each do |mountain|
@@ -186,8 +182,6 @@ class CLI
     end
   end
 
-  #calls .get_page from Scraper class to create initial list, set to var "info"
-  #then, calls .create_from_scrape in Mountain class
   def scrape_page
     info = Scraper.get_page
     Mountain.create_from_scrape(info)
